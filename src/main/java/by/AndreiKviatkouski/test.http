@@ -1,0 +1,24 @@
+POST  http://localhost:8080/clients
+Content-Type: application/json
+
+{
+  "firstName": "Chu",
+  "lastName": "Li",
+  "birthDay": "10-10-2010",
+  "email": "li@gmail.ru",
+  "phone": "+375291001020"
+
+}
+
+###
+
+GET  http://localhost:8080/clients
+Content-Type: application/json
+
+###
+
+GET  http://localhost:8080/clients/1
+Content-Type: application/json
+
+
+###

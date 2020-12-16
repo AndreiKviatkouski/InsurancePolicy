@@ -3,6 +3,7 @@ package by.AndreiKviatkouski.controller;
 import by.AndreiKviatkouski.model.Client;
 import by.AndreiKviatkouski.service.ClientService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +21,18 @@ public class ClientController {
     }
 
 
-    @PostMapping(value = "/clients")
+    @PostMapping(value = "/clients",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+
     public ResponseEntity<?> create(@RequestBody Client client) {
         clientService.create(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/clients")
+    @GetMapping(value = "/clients",
+            produces =  {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+
     public ResponseEntity<List<Client>> getAll() {
         final List<Client> clients = clientService.getAll();
 
@@ -35,8 +41,10 @@ public class ClientController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/clients/{id}")
-    public ResponseEntity<Client> getById(@PathVariable(name = "id") int id) {
+    @GetMapping(value = "/clients/{id}",produces =
+            {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+
+    public ResponseEntity<Client> getById(@PathVariable(name = "id") long id) {
         final Client client = clientService.getById(id);
 
         return client != null
@@ -44,17 +52,39 @@ public class ClientController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/clients/{id}")
-    public ResponseEntity<?> updateById(@PathVariable (name = "id") int id, @RequestBody Client client) {
-        final boolean updated = clientService.updateById(client, id);
+    @PutMapping(value = "/clients/{id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+
+    public ResponseEntity<?> updateById(@PathVariable (name = "id") long id, @RequestBody Client client) {
+        client.setId(id);
+        final boolean updated = clientService.update(client);
 
         return updated
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "/clients/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable(name = "id") int id) {
+    @PutMapping(value = "/clients/{id}{phone}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+
+    public ResponseEntity<?> updateClientByPhone(@PathVariable (name = "id") long id, @PathVariable (name = "phone") String phone, @RequestBody Client client) {
+        client.setId(id);
+        client.setPhone(phone);
+        final boolean updated = clientService.update(client);
+
+        return updated
+                ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+
+
+    @DeleteMapping(value = "/clients/{id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+
+    public ResponseEntity<?> deleteById(@PathVariable(name = "id") long id) {
         final boolean deleted = clientService.deleteById(id);
 
         return deleted

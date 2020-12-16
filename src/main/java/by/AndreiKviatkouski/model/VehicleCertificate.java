@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 public class VehicleCertificate {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
 
     @Pattern(regexp = "^[A-Z]{2}[0-9]{1,6}$", message = "Example: AA123456 ")

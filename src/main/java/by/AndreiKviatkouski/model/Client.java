@@ -3,7 +3,6 @@ package by.AndreiKviatkouski.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -19,15 +18,15 @@ import java.time.LocalDate;
 
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @NotBlank
-    @Pattern(regexp= "^[A-Z][a-z]{1,6}$",message = "Example: Bob")
+    @Pattern(regexp = "^[A-Z][a-z]{1,10}$", message = "Example: Bob")
     private String firstName;
 
     @NotBlank
-    @Pattern(regexp= "^[A-Z][a-z]{1,10}$",message = "Example: Li")
+    @Pattern(regexp = "^[A-Z][a-z]{1,10}$", message = "Example: Li")
     private String lastName;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -35,9 +34,9 @@ public class Client {
     private LocalDate birthDay;
 
     @Email
-    private  String email;
+    private String email;
 
-    @Pattern(regexp ="^\\+?375[\\(]?\\d{2}\\)?-?\\d{3}-?\\d{2}-?\\d{2}$",message = "Example:+375(XX)-XXX-XX-XX or +375XXXXXXXXX")
+    @Pattern(regexp = "^\\+?375[\\(]?\\d{2}\\)?-?\\d{3}-?\\d{2}-?\\d{2}$", message = "Example:+375(XX)-XXX-XX-XX or +375XXXXXXXXX")
     private String phone;
 
     @OneToOne
@@ -45,5 +44,9 @@ public class Client {
 
     @OneToOne
     Address address;
+
+    @NotBlank
+    @Pattern(regexp = "^[0-9]{1,2}$", message = "Example: 5 ")
+    private String drivingExperience;
 
 }

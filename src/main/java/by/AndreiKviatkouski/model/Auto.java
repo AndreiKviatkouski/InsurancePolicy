@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Table(name = "client_auto")
 public class Auto {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private long id;
 
     @Pattern(regexp= "^[A-Z][0-9][A-Z][0-9][A-Z][0-9]$",message = "A1B2C3")

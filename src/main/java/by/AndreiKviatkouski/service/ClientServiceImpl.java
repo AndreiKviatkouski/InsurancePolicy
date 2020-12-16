@@ -19,7 +19,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void create(Client client) {
-        clientRepository.save(client);
+        if (!clientRepository.existsByPhone(client.getPhone())) {
+            clientRepository.save(client);
+        }
     }
 
     @Override
@@ -33,10 +35,16 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean updateById(Client client, long id) {
-        if (clientRepository.existsById(id)) {
-            client.setId(id);
+    public boolean update(Client client) {
+        Client existClient = clientRepository.getOne(client.getId());
+
+        if (clientRepository.existsById(client.getId())) {
+            existClient.setId(client.getId());
             clientRepository.save(client);
+            return true;
+        }
+        if (clientRepository.existsByPhone(client.getPhone())){
+            existClient.setPhone(client.getPhone());
             return true;
         }
 

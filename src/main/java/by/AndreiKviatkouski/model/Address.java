@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Table(name = "client_address")
 public class Address {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
 
     @Pattern(regexp= "^[A-Z][a-z]{1,20}$",message = "Example: Minsk")

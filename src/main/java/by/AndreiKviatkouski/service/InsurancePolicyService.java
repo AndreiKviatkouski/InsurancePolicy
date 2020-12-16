@@ -1,18 +1,19 @@
 package by.AndreiKviatkouski.service;
 
-import by.AndreiKviatkouski.model.Client;
-import by.AndreiKviatkouski.model.Policy;
+import by.AndreiKviatkouski.model.InsurancePolicy;
 
 import java.util.List;
 
 public interface InsurancePolicyService {
-    void create(Policy policy);
 
-    List<Policy> getAll();
+    void createCASCO(InsurancePolicy insurancePolicy);
+    void createOSAGO(InsurancePolicy insurancePolicy);
 
-    Policy getById(int id);
+    List<InsurancePolicy> getAll();
 
-    boolean updateById(Policy policy, int id);
+    InsurancePolicy getById(long id);
 
-    boolean deleteById(int id);
+    boolean updateById(InsurancePolicy insurancePolicy, long id);
+
+    boolean deleteById(long id);
 }

@@ -1,6 +1,5 @@
 package by.AndreiKviatkouski.service;
 
-import by.AndreiKviatkouski.model.Address;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

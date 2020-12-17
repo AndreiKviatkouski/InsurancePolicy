@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class PolicyController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> createCASCO(@RequestBody InsurancePolicy insurancePolicy) {
+    public ResponseEntity<?> createCASCO(@Valid @RequestBody InsurancePolicy insurancePolicy) {
         insurancePolicyService.createCASCO(insurancePolicy);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -32,7 +33,7 @@ public class PolicyController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> createOSAGO(@RequestBody InsurancePolicy insurancePolicy) {
+    public ResponseEntity<?> createOSAGO(@Valid @RequestBody InsurancePolicy insurancePolicy) {
         insurancePolicyService.createOSAGO(insurancePolicy);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -51,7 +52,7 @@ public class PolicyController {
     @GetMapping(value = "/forms/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<InsurancePolicy> getById(@PathVariable(name = "id") int id) {
+    public ResponseEntity<InsurancePolicy> getById(@Valid @PathVariable(name = "id") int id) {
         final InsurancePolicy insurancePolicy = insurancePolicyService.getById(id);
 
         return insurancePolicy != null
@@ -63,7 +64,7 @@ public class PolicyController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> updateById(@PathVariable(name = "id") int id, @RequestBody InsurancePolicy insurancePolicy) {
+    public ResponseEntity<?> updateById(@Valid @PathVariable(name = "id") int id, @RequestBody InsurancePolicy insurancePolicy) {
         final boolean updated = insurancePolicyService.updateById(insurancePolicy, id);
 
         return updated
@@ -75,7 +76,7 @@ public class PolicyController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> deleteById(@PathVariable(name = "id") int id) {
+    public ResponseEntity<?> deleteById(@Valid @PathVariable(name = "id") int id) {
         final boolean deleted = insurancePolicyService.deleteById(id);
 
         return deleted

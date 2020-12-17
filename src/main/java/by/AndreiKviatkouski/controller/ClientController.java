@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -25,7 +26,7 @@ public class ClientController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> create(@RequestBody Client client) {
+    public ResponseEntity<?> create(@Valid @RequestBody Client client) {
         clientService.create(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -41,10 +42,11 @@ public class ClientController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/clients/{id}",produces =
-            {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "/clients/{id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<Client> getById(@PathVariable(name = "id") long id) {
+    public ResponseEntity<Client> getById(@Valid @PathVariable(name = "id") long id) {
         final Client client = clientService.getById(id);
 
         return client != null
@@ -56,7 +58,7 @@ public class ClientController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> updateById(@PathVariable (name = "id") long id, @RequestBody Client client) {
+    public ResponseEntity<?> updateById(@Valid @PathVariable (name = "id") long id, @RequestBody Client client) {
         client.setId(id);
         final boolean updated = clientService.update(client);
 
@@ -69,7 +71,7 @@ public class ClientController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> updateClientByPhone(@PathVariable (name = "id") long id, @PathVariable (name = "phone") String phone, @RequestBody Client client) {
+    public ResponseEntity<?> updateClientByPhone(@Valid @PathVariable (name = "id") long id, @PathVariable (name = "phone") String phone, @RequestBody Client client) {
         client.setId(id);
         client.setPhone(phone);
         final boolean updated = clientService.update(client);
@@ -84,7 +86,7 @@ public class ClientController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> deleteById(@PathVariable(name = "id") long id) {
+    public ResponseEntity<?> deleteById(@Valid @PathVariable(name = "id") long id) {
         final boolean deleted = clientService.deleteById(id);
 
         return deleted

@@ -75,4 +75,4 @@ mvnw spring-boot:run
  
   ## Repo owner: Andrei Kviatkouski
   
-atsyhankova@eisgroup.com
+

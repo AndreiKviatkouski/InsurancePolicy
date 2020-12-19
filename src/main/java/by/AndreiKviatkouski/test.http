@@ -36,8 +36,9 @@ PUT http://localhost:8080/clients/1
 Content-Type: application/json
 
 {
- "lastName": "Parl",
-  "phone": "+375398997898"
+  "firstName": "Bob",
+ "lastName": "Rich",
+  "phone": "+375298997898"
 }
 
 

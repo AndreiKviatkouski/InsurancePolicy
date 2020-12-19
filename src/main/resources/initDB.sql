@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS client_address
     id     INTEGER PRIMARY KEY,
     city   TEXT     NOT NULL,
     street TEXT     NOT NULL,
-    home   SMALLINT NOT NULL,
-    flat   SMALLINT NOT NULL
+    home   VARCHAR(255) NOT NULL,
+    flat   VARCHAR(255) NOT NULL
 );
 
 

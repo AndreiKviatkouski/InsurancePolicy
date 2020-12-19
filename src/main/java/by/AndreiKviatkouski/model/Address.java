@@ -22,8 +22,8 @@ public class Address {
     private String street;
 
     @Pattern(regexp= "^[0-9]{1,4}$",message = "Example: 10")
-    private int home;
+    private String home;
 
     @Pattern(regexp= "^[0-9]{1,4}$",message = "Example: 159")
-    private int flat;
+    private String flat;
 }

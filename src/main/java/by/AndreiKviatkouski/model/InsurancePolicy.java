@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "form")
 public class InsurancePolicy {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;

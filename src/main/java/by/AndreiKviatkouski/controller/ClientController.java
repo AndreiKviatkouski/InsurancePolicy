@@ -26,7 +26,7 @@ public class ClientController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> create(@Valid @RequestBody Client client) {
+    public ResponseEntity<Client> create(@Valid @RequestBody Client client) {
         clientService.create(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -58,28 +58,15 @@ public class ClientController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> updateById(@Valid @PathVariable (name = "id") long id, @RequestBody Client client) {
-        client.setId(id);
-        final boolean updated = clientService.update(client);
+    public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody Client client) {
+        final boolean updated = clientService.update(client, id);
 
         return updated
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @PutMapping(value = "/clients/{id}{phone}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces =  {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<?> updateClientByPhone(@Valid @PathVariable (name = "id") long id, @PathVariable (name = "phone") String phone, @RequestBody Client client) {
-        client.setId(id);
-        client.setPhone(phone);
-        final boolean updated = clientService.update(client);
-
-        return updated
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-    }
 
 
     @DeleteMapping(value = "/clients/{id}",

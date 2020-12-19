@@ -35,21 +35,32 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean update(Client client) {
-        Client existClient = clientRepository.getOne(client.getId());
+    public boolean update(Client client, long id) {
+        Client existClient = clientRepository.getOne(id);
 
-        if (clientRepository.existsById(client.getId())) {
-            existClient.setId(client.getId());
-            clientRepository.save(client);
+        if (client.getLastName() != null) {
+            existClient.setLastName(client.getLastName());
+            clientRepository.save(existClient);
             return true;
         }
-        if (clientRepository.existsByPhone(client.getPhone())){
+        if (client.getPhone() != null) {
             existClient.setPhone(client.getPhone());
+            clientRepository.save(existClient);
             return true;
         }
 
         return false;
     }
+//        if (clientRepository.existsById(id)) {
+//            Client client1 = clientRepository.getOne(id);
+//            client1.setId(id);
+//            client1.setLastName(client.getLastName());
+//            clientRepository.save(client1);
+//            return true;
+//        }
+//
+//        return false;
+//    }
 
     @Override
     public boolean deleteById(long id) {

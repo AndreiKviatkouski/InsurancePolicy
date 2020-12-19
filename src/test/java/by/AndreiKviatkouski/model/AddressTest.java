@@ -13,7 +13,7 @@ class AddressTest {
 
         adr.setId(1L);
         adr.setCity("Minsk");
-        adr.setFlat(494);
+        adr.setFlat("494");
         adr.setStreet("Lenina");
 
         assertEquals(1l, adr.getId());

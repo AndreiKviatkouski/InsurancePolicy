@@ -11,7 +11,7 @@ public interface ClientService {
 
     Client getById(long id);
 
-    boolean update(Client client);
+    boolean update(Client client,long id);
 
     boolean deleteById(long id);
 }

@@ -1,34 +1,36 @@
 GET http://localhost:8080/clients
 Content-Type: application/json
+
 ###
 
 POST http://localhost:8080/clients
 Content-Type: application/json
 
 {
-    "firstName": "Taso",
-    "lastName": "Vetrov",
-    "birthDay": "10-10-1990",
-    "email": "ppetrov@jr.com",
-    "phone": "+375(29)812-22-33",
-    "passport": {
-      "seriesAndNumber": "MR973456",
-      "registrationDate": "05-10-2000"
-    },
-    "address": {
-      "city": "Minsk",
-      "street": "Platonova",
-      "home":"1",
-      "flat":"21"
-    },
-    "drivingExperience": "2"
+  "firstName": "Taso",
+  "lastName": "Vetrov",
+  "birthDay": "10-10-1990",
+  "email": "ppetrov@jr.com",
+  "phone": "+375(29)912-22-33",
+  "passport": {
+    "seriesAndNumber": "MR973456",
+    "registrationDate": "05-10-2000"
+  },
+  "address": {
+    "city": "Minsk",
+    "street": "Platonova",
+    "home": "1",
+    "flat": "21"
+  },
+  "drivingExperience": "2"
 }
 
 ###
 
 
-GET http://localhost:8080/clients/62
+GET http://localhost:8080/clients/4654654659
 Content-Type:  application/json
+
 ###
 
 
@@ -36,9 +38,9 @@ PUT http://localhost:8080/clients/1
 Content-Type: application/json
 
 {
-  "firstName": "Bob",
- "lastName": "Rich",
-  "phone": "+375298997898"
+  "id": "12",
+  "firstName": "Vova"
+
 }
 
 

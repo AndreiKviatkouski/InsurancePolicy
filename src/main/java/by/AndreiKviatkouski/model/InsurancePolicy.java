@@ -29,6 +29,7 @@ public class InsurancePolicy {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     @Column(nullable = false, updatable = false)
+
     @CreatedDate
     private  LocalDateTime updateOn;
 

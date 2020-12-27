@@ -37,23 +37,20 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public boolean update(Client client, long id) {
         Client existClient = clientRepository.getOne(id);
-       boolean a= false;
+       boolean checkParam= false;
         if (client.getFirstName() != null) {
             existClient.setFirstName(client.getFirstName());
-            a = true;
-//            clientRepository.save(existClient);
+            checkParam= true;
         }
         if (client.getLastName() != null) {
             existClient.setLastName(client.getLastName());
-//            clientRepository.save(existClient);
-            a = true;
+            checkParam = true;
         }
         if (client.getPhone() != null) {
             existClient.setPhone(client.getPhone());
-//            clientRepository.save(existClient);
-            a = true;
+            checkParam = true;
         }
-        if (a){
+        if (checkParam){
             clientRepository.save(existClient);
             return true;
         }
